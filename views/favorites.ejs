@@ -1,0 +1,24 @@
+<%- include("layout", { title, body: `
+<h1>My Favorites</h1>
+
+${favorites.length === 0 ? `
+<p>No favorites saved yet. Go pick a type!</p>
+` : `
+<div class="grid">
+  ${favorites.map(f => `
+  <div class="card pokemon-card">
+    <h3 class="poke-name">${f.pokemonName}</h3>
+    <p class="badge">type: ${f.type}</p>
+    <img class="sprite" src="${f.spriteUrl}" alt="${f.pokemonName} sprite" />
+    ${f.note ? `
+    <p class="note">"${f.note.replaceAll('"','&quot;')}"</p>
+    ` : ``}
+
+    <form method="POST" action="/favorites/delete">
+      <input type="hidden" name="id" value="${f._id}" />
+      <button class="remove" type="submit">Delete</button>
+    </form>
+  </div>
+  `).join("")}
+</div>
+`} ` }) %>

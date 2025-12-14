@@ -1,0 +1,34 @@
+<%- include("layout", { title, body: `
+<h1>Type: ${type}</h1>
+<p>Showing ${shownCount} of ${totalCount} Pokémon for this type.</p>
+
+<div class="grid">
+  ${pokemonList.map(p => `
+  <div class="card pokemon-card">
+    <div class="row">
+      <div>
+        <h3 class="poke-name">${p.name}</h3>
+        ${p.spriteUrl ? `<img
+          class="sprite"
+          src="${p.spriteUrl}"
+          alt="${p.name} sprite"
+        />` : `
+        <div class="no-sprite">No sprite</div>
+        `}
+      </div>
+    </div>
+
+    <form method="POST" action="/favorites/add" class="save-form">
+      <input type="hidden" name="pokemonName" value="${p.name}" />
+      <input type="hidden" name="type" value="${type}" />
+      <input type="hidden" name="spriteUrl" value="${p.spriteUrl}" />
+
+      <label>Note</label>
+      <input name="note" placeholder="Why do you like this Pokémon?" />
+
+      <button type="submit">Save to Favorites</button>
+    </form>
+  </div>
+  `).join("")}
+</div>
+` }) %>

@@ -1,0 +1,14 @@
+<%- include("layout", { title, body: `
+<h1>Favorite Pokémon by Type</h1>
+<p>Select a type, pick a Pokémon, and save your favorites with notes.</p>
+
+<form class="card" method="GET" action="/types">
+  <label for="type">Choose a type</label>
+  <select id="type" name="type" required>
+    ${types.map(t => `
+    <option value="${t}">${t}</option>
+    `).join("")}
+  </select>
+  <button type="submit">Show Pokémon</button>
+</form>
+` }) %>
